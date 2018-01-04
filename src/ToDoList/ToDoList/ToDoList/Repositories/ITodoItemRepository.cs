@@ -10,6 +10,7 @@ namespace ToDoList.Repositories
         /// Retrieves all the items
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="Exception">Exception</exception>
         Task<IEnumerable<TodoItem>> GetAll();
     }
 }
