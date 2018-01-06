@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using System;
 using ToDoList.Services;
 using ToDoList.ViewModels;
 using Xamarin.Forms;
@@ -11,13 +12,18 @@ namespace ToDoList.Views
 	{
         TodoItemsViewModel viewModel;
 
-		public TodoItemsPage ()
+		public TodoItemsPage()
 		{
 			InitializeComponent();
 
             var todoItemService = IoC.IoCRegister.Container.Resolve<ITodoItemService>();
 
             BindingContext = viewModel = new TodoItemsViewModel(todoItemService);
+        }
+
+        async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new NewTodoItemPage()));
         }
 
         protected override void OnAppearing()

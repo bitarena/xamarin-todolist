@@ -12,7 +12,7 @@ namespace ToDoList
 
             InitializeDependencies();
 
-            MainPage = new TodoItemsPage();
+            MainPage = new NavigationPage(new TodoItemsPage());
         }
 
         private void InitializeDependencies()

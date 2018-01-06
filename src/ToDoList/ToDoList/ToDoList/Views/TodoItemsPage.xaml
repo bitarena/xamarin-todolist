@@ -3,31 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:ToDoList.Converters;assembly=ToDoList"
              x:Class="ToDoList.Views.TodoItemsPage"
-             Title="{Binding Title}">
+             Title="Todo List">
     <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:StatusToCharConverter x:Key="StatusToCharConverter" />
-        </ResourceDictionary>
+    <ResourceDictionary>
+        <converters:StatusToCharConverter x:Key="StatusToCharConverter" />
+    </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView
-                ItemsSource="{Binding TodoItems}"
-                RefreshCommand="{Binding FetchTodoItemsCommand}"
-                VerticalOptions="FillAndExpand">
+                    ItemsSource="{Binding TodoItems}"
+                    RefreshCommand="{Binding FetchTodoItemsCommand}"
+                    VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="10">
-                                <!--<Image Source="{Binding Image}" />-->
                                 <Label Text="{Binding IsComplete, Converter={StaticResource StatusToCharConverter}}" />
                                 <Label FontSize="16" Text="{Binding Name}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+</ContentPage.Content>
+
+
 </ContentPage>
