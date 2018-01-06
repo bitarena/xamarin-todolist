@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +42,24 @@ namespace ToDoList.UnitTests.Services
 
             // Assert
             Assert.AreEqual(actual.First(), mockItems.First());
+        }
+
+        [TestMethod]
+        public async Task WillCreateNewItem()
+        {
+            // Arrange
+            var item = new TodoItem
+            {
+                Name = Guid.NewGuid().ToString(),
+                IsComplete = false,
+            };
+            todoItemRepository.Create(item).Returns(true);
+
+            // Act
+            var actual = await sut.Create(item);
+
+            // Assert
+            Assert.IsTrue(actual);
         }
     }
 }

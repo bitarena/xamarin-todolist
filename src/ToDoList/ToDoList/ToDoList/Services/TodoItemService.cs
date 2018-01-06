@@ -15,6 +15,19 @@ namespace ToDoList.Services
             this.todoItemRepository = todoItemRepository ?? throw new ArgumentNullException("todoItemRepository");
         }
 
+        public async Task<bool> Create(TodoItem item)
+        {
+            try
+            {
+                var result = await todoItemRepository.Create(item);
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public async Task<IEnumerable<TodoItem>> GetAll()
         {
             try
@@ -24,7 +37,7 @@ namespace ToDoList.Services
             }
             catch(Exception e)
             {
-                throw new Exception("could not retrieve data");
+                throw new Exception(e.Message);
             }
         }
     }

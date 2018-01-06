@@ -4,9 +4,15 @@
              x:Class="ToDoList.Views.NewTodoItemPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label 
+                Text="Name"
+                FontSize="20"
+                HorizontalOptions="Start" />
+            <Entry 
+                Text="{Binding Name}"/>
+            <Button 
+                VerticalOptions="EndAndExpand" 
+                Command="{Binding CreateNewTodoItemCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

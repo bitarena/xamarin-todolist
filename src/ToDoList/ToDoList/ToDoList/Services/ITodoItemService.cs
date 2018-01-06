@@ -7,5 +7,7 @@ namespace ToDoList.Services
     public interface ITodoItemService
     {
         Task<IEnumerable<TodoItem>> GetAll();
+
+        Task<bool> Create(TodoItem item);
     }
 }

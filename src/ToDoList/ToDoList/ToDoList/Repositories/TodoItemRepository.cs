@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using ToDoList.Models;
 
@@ -15,6 +16,27 @@ namespace ToDoList.Repositories
         public TodoItemRepository(ITodoItemRepositoryOptions options)
         {
             this.options = options ?? throw new ArgumentNullException("options");
+        }
+
+        public async Task<bool> Create(TodoItem item)
+        {
+            var httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(options.CreateUrl, content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                httpClient.Dispose();
+            }
         }
 
         public async Task<IEnumerable<TodoItem>> GetAll()
@@ -32,9 +54,9 @@ namespace ToDoList.Repositories
                     return result;
                 }
             }
-            catch(HttpRequestException e)
+            catch (HttpRequestException e)
             {
-                throw new Exception("Could not connect");
+                throw new Exception(e.Message);
             }
             finally
             {

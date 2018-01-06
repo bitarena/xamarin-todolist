@@ -3,5 +3,7 @@
     public interface ITodoItemRepositoryOptions
     {
         string GetAllUrl { get; }
+
+        string CreateUrl { get; }
     }
 }

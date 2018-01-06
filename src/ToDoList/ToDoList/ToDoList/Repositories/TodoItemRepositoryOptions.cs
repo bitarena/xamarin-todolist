@@ -4,6 +4,8 @@
     {
         private const string BaseUrl = "http://192.168.1.108:1000/api/todo";
 
-        public string GetAllUrl => $"{BaseUrl}";
+        public string GetAllUrl => BaseUrl;
+
+        public string CreateUrl => BaseUrl;
     }
 }
