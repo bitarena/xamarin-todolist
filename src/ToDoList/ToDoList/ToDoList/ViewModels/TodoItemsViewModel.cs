@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDoList.Models;
 using ToDoList.Services;
+using ToDoList.Views;
 using Xamarin.Forms;
 
 namespace ToDoList.ViewModels
@@ -20,6 +21,22 @@ namespace ToDoList.ViewModels
             this.todoItemService = todoItemService;
             TodoItems = new ObservableCollection<TodoItem>();
             FetchTodoItemsCommand = new Command(async () => await ExecuteFetchTodoItemsCommand());
+
+            MessagingCenter.Subscribe<NewTodoItemPage, TodoItem>(this, "AddTodoItem", async (obj, item) => await AddTodoItem(item));
+        }
+
+        async Task AddTodoItem(TodoItem item)
+        {
+            try
+            {
+                await todoItemService.Create(item);
+                TodoItems.Add(item);
+            }
+            catch (Exception ex)
+            {
+                // TODO: show alert
+                Debug.WriteLine(ex);
+            }
         }
 
         async Task ExecuteFetchTodoItemsCommand()

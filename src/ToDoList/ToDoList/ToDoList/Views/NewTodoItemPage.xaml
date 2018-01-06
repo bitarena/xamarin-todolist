@@ -9,10 +9,11 @@
                 FontSize="20"
                 HorizontalOptions="Start" />
             <Entry 
-                Text="{Binding Name}"/>
+                Text="{Binding Item.Name}"/>
             <Button 
+                Text="Create"
                 VerticalOptions="EndAndExpand" 
-                Command="{Binding CreateNewTodoItemCommand}" />
+                Clicked="CreateNewTodoItem_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
