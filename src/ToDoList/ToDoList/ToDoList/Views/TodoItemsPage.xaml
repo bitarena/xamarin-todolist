@@ -6,7 +6,7 @@
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:BoolToCharConverter x:Key="BoolToCharConverter" />
+            <converters:StatusToCharConverter x:Key="StatusToCharConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -20,7 +20,7 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="10">
                                 <!--<Image Source="{Binding Image}" />-->
-                                <Label Text="{Binding IsComplete, Converter={StaticResource BoolToCharConverter}}" />
+                                <Label Text="{Binding IsComplete, Converter={StaticResource StatusToCharConverter}}" />
                                 <Label FontSize="16" Text="{Binding Name}" />
                             </StackLayout>
                         </ViewCell>

@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\StatusToCharConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TodoItemServiceTests.cs" />
     <Compile Include="ViewModels\TodoItemsViewModelTests.cs" />

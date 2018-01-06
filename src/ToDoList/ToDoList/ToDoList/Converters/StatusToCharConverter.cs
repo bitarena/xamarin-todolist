@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace ToDoList.Converters
 {
-    public class BoolToCharConverter : IValueConverter
+    public class StatusToCharConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
