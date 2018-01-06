@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using ToDoList.IoC;
+using ToDoList.Views;
 using Xamarin.Forms;
 
 namespace ToDoList
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new ToDoList.MainPage();
-		}
+            InitializeDependencies();
 
-		protected override void OnStart ()
+            MainPage = new TodoItemsPage();
+        }
+
+        private void InitializeDependencies()
+        {
+            IoCRegister.Register();
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}

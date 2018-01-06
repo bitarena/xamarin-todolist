@@ -11,13 +11,14 @@ namespace ToDoList.ViewModels
 {
     public class TodoItemsViewModel : BaseViewModel
     {
-        private ITodoItemService todoItemService;
+        private readonly ITodoItemService todoItemService;
         public ObservableCollection<TodoItem> TodoItems { get; set; }
         public ICommand FetchTodoItemsCommand { get; set; }
 
         public TodoItemsViewModel(ITodoItemService todoItemService)
         {
             this.todoItemService = todoItemService;
+            TodoItems = new ObservableCollection<TodoItem>();
             FetchTodoItemsCommand = new Command(async () => await ExecuteFetchTodoItemsCommand());
         }
 

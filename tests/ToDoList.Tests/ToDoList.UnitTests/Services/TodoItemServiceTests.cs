@@ -23,7 +23,7 @@ namespace ToDoList.UnitTests.Services
         }
 
         [TestMethod]
-        public async Task GetAll()
+        public async Task WillGetAllItems()
         {
             // Arrange
             var mockItems = new List<TodoItem>
