@@ -17,6 +17,7 @@ namespace ToDoList.Repositories
         /// Stores a new item in the list
         /// </summary>
         /// <param name="item">The item to add to the list</param>
+<<<<<<< HEAD
         /// <returns></returns>
         Task<bool> Create(TodoItem item);
 
@@ -26,5 +27,7 @@ namespace ToDoList.Repositories
         /// <param name="id">The identifier of the item to be removed</param>
         /// <exception cref="Exception">Exception</exception>
         Task Delete(string id);
+=======
+>>>>>>> master
     }
 }
