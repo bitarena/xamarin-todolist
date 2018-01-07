@@ -75,7 +75,7 @@ namespace ToDoList.IntegrationTests.DataAccess
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public async Task WillErrorWhenItemNotFound()
+        public async Task WillErrorWhenDeletesItemNotFound()
         {
             // Arrange
             var key = Guid.NewGuid().ToString();
@@ -83,5 +83,47 @@ namespace ToDoList.IntegrationTests.DataAccess
             // Act
             await sut.Delete(key);
         }
+
+        [TestMethod]
+        public async Task WillUpdateStatusWhenItemExists()
+        {
+            // Arrange
+            var item = new TodoItem
+            {
+                Name = "update test",
+                IsComplete = false,
+            };
+
+            var savedItem = await sut.Create(item);
+            savedItem.IsComplete = true;
+
+            // Act
+
+            await sut.Update(savedItem.Key, savedItem);
+            var items = await sut.GetAll();
+
+            // Assert
+            Assert.IsTrue(items.Where(x => x.Key == savedItem.Key && x.IsComplete).Count() == 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public async Task WillErrorWhenUpdateItemNotFound()
+        {
+            // Arrange
+            var key = Guid.NewGuid().ToString();
+
+            var item = new TodoItem
+            {
+                Key = key,
+                Name = "update test",
+                IsComplete = true,
+            };
+
+            // Act
+            await sut.Update(item.Key, item);
+        }
+
+        // TODO: Add more tests
     }
 }

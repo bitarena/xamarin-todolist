@@ -76,7 +76,7 @@ namespace ToDoList.Repositories
 
             try
             {
-                var response = await httpClient.GetAsync(new Uri(options.GetAllUrl));
+                var response = await httpClient.GetAsync(options.GetAllUrl);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -93,6 +93,31 @@ namespace ToDoList.Repositories
                 httpClient.Dispose();
             }
             throw new Exception("Could not connect");
+        }
+
+        public async Task Update(string id, TodoItem item)
+        {
+            var httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var endpoint = string.Format(options.PutUrl, id);
+
+            try
+            {
+                var response = await httpClient.PutAsync(endpoint, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ArgumentException("Item does not exist");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                httpClient.Dispose();
+            }
         }
     }
 }

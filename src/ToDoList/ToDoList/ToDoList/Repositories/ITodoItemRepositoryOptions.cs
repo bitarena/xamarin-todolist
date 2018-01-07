@@ -7,5 +7,7 @@
         string CreateUrl { get; }
 
         string DeleteUrl { get; }
+
+        string PutUrl { get; }
     }
 }
