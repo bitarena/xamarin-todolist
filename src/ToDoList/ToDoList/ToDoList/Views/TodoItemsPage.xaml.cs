@@ -19,6 +19,12 @@ namespace ToDoList.Views
 
             var todoItemService = IoC.IoCRegister.Container.Resolve<ITodoItemService>();
 
+            // TODO: Remove hardcodeds
+            MessagingCenter.Subscribe<TodoItemsViewModel, TodoItem>(this, "DeletedTodoItem", async (obj, item) =>
+            {
+                await DisplayAlert("Info", $"ToDo item {item.Name} has been deleted correctly", "Ok");
+            });
+
             BindingContext = viewModel = new TodoItemsViewModel(todoItemService);
         }
 
@@ -30,8 +36,9 @@ namespace ToDoList.Views
         async void DeleteItem_Clicked(object sender, EventArgs e)
         {
             var menuItem = (MenuItem)sender;
+            var todoItem = (TodoItem)menuItem.CommandParameter;
 
-            viewModel.DeleteTodoItemCommand.Execute((TodoItem)menuItem.CommandParameter);
+            viewModel.DeleteTodoItemCommand.Execute(todoItem);
         }
 
         protected override void OnAppearing()

@@ -8,6 +8,6 @@
 
         public string CreateUrl => BaseUrl;
 
-        public string DeleteUrl => $"{BaseUrl}/{0}";
+        public string DeleteUrl => $"{BaseUrl}/{{0}}";
     }
 }

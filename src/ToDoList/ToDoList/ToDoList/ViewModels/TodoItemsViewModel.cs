@@ -35,6 +35,7 @@ namespace ToDoList.ViewModels
             FetchTodoItemsCommand = new Command(async () => await ExecuteFetchTodoItemsCommand());
             DeleteTodoItemCommand = new Command(async (item) => await ExecuteDeleteTodoItemCommand((TodoItem)item));
 
+            // TODO: Remove hardcoded
             MessagingCenter.Subscribe<NewTodoItemPage, TodoItem>(this, "AddTodoItem", async (obj, item) => await AddTodoItem(item));
         }
 
@@ -53,7 +54,18 @@ namespace ToDoList.ViewModels
         }
         async Task ExecuteDeleteTodoItemCommand(TodoItem item)
         {
+            try
+            {
+                await todoItemService.Delete(item);
+                TodoItems.Remove(item);
 
+                // TODO: Remove hardcoded
+                MessagingCenter.Send(this, "DeletedTodoItem", item);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
         async Task ExecuteFetchTodoItemsCommand()
