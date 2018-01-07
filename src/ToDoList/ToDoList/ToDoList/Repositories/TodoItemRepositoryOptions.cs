@@ -7,5 +7,7 @@
         public string GetAllUrl => BaseUrl;
 
         public string CreateUrl => BaseUrl;
+
+        public string DeleteUrl => $"{BaseUrl}/{0}";
     }
 }

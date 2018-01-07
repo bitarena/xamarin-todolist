@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ToDoList.Models;
 using ToDoList.Repositories;
@@ -48,8 +50,9 @@ namespace ToDoList.IntegrationTests.DataAccess
             Assert.IsNotNull(actual.Key);
         }
 
+        // TODO: Add more tests
+
         [TestMethod]
-        [Ignore]
         public async Task WillDeleteExistingItem()
         {
             // Arrange
@@ -59,11 +62,26 @@ namespace ToDoList.IntegrationTests.DataAccess
                 IsComplete = false
             };
 
-            await sut.Create(item);
+            var addedItem = await sut.Create(item);
 
             // Act
+            await sut.Delete(addedItem.Key);
+
+            var items = await sut.GetAll();
 
             // Assert
+            Assert.IsFalse(items.Any(x => x.Key == item.Key));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public async Task WillErrorWhenItemNotFound()
+        {
+            // Arrange
+            var key = Guid.NewGuid().ToString();
+
+            // Act
+            await sut.Delete(key);
         }
     }
 }

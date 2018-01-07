@@ -5,5 +5,7 @@
         string GetAllUrl { get; }
 
         string CreateUrl { get; }
+
+        string DeleteUrl { get; }
     }
 }

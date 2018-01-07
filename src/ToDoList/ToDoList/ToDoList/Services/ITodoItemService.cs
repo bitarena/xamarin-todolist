@@ -9,8 +9,8 @@ namespace ToDoList.Services
         // TODO: add documentation
         Task<IEnumerable<TodoItem>> GetAll();
 
-<<<<<<< HEAD
-        Task<bool> Create(TodoItem item);
+        // TODO: add documentation
+        Task<TodoItem> Create(TodoItem item);
 
         /// <summary>
         /// Deletes the item
@@ -18,7 +18,5 @@ namespace ToDoList.Services
         /// <param name="item">The item to be removed</param>
         /// exception cref="Exception">Exception</exception>
         Task Delete(TodoItem item);
-=======
->>>>>>> master
     }
 }

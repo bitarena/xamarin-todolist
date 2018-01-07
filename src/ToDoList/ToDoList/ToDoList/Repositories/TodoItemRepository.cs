@@ -46,9 +46,27 @@ namespace ToDoList.Repositories
             }
         }
 
-        public Task Delete(string id)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            var httpClient = new HttpClient();
+
+            try
+            {
+                var response = await httpClient.DeleteAsync(string.Format(options.DeleteUrl, id));
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ArgumentException("Could not delete that item");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                httpClient.Dispose();
+            }
         }
 
         public async Task<IEnumerable<TodoItem>> GetAll()

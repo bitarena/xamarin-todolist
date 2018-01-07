@@ -55,29 +55,35 @@ namespace ToDoList.UnitTests.Services
                 IsComplete = false,
             };
 
+            var expected = item;
+            expected.Key = key;
+
+            todoItemRepository.Create(item).Returns(expected);
+
             // Act
             var actual = await sut.Create(item);
 
             // Assert
+            Assert.AreEqual(actual, expected);
         }
 
         [TestMethod]
-        [Ignore]
         public async Task WillDeleteOneItem()
         {
             // Arrange
+            var key = Guid.NewGuid().ToString();
             var item = new TodoItem
             {
-                Key = Guid.NewGuid().ToString(),
                 Name = "test",
                 IsComplete = true,
             };
 
-            await sut.Create(item);
-            sut.GetAll().Returns(new List<TodoItem>
-            {
-                item,
-            });
+            var addedItem = item;
+            addedItem.Key = key;
+
+            todoItemRepository.Create(item).Returns(addedItem);
+
+            todoItemRepository.GetAll().Returns(new List<TodoItem>());
 
             // Act
             await sut.Delete(item);
