@@ -15,9 +15,11 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView
-                    ItemsSource="{Binding TodoItems}"
-                    RefreshCommand="{Binding FetchTodoItemsCommand}"
-                    VerticalOptions="FillAndExpand">
+                ItemsSource="{Binding TodoItems}"
+                RefreshCommand="{Binding FetchTodoItemsCommand}"
+                VerticalOptions="FillAndExpand"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

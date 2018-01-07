@@ -13,8 +13,19 @@ namespace ToDoList.ViewModels
     public class TodoItemsViewModel : BaseViewModel
     {
         private readonly ITodoItemService todoItemService;
+        private bool isRefreshing;
         public ObservableCollection<TodoItem> TodoItems { get; set; }
         public ICommand FetchTodoItemsCommand { get; set; }
+
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
 
         public TodoItemsViewModel(ITodoItemService todoItemService)
         {
@@ -47,11 +58,13 @@ namespace ToDoList.ViewModels
             }
 
             IsBusy = true;
-            
+            IsRefreshing = false;
+
             try
             {
                 TodoItems.Clear();
                 var todoItems = await todoItemService.GetAll();
+
                 foreach (var item in todoItems)
                 {
                     TodoItems.Add(item);
@@ -65,6 +78,7 @@ namespace ToDoList.ViewModels
             finally
             {
                 IsBusy = false;
+                IsRefreshing = false;
             }
         }
     }
