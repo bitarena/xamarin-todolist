@@ -16,6 +16,7 @@ namespace ToDoList.ViewModels
         private bool isRefreshing;
         public ObservableCollection<TodoItem> TodoItems { get; set; }
         public ICommand FetchTodoItemsCommand { get; set; }
+        public ICommand DeleteTodoItemCommand { get; set; }
 
         public bool IsRefreshing
         {
@@ -32,6 +33,7 @@ namespace ToDoList.ViewModels
             this.todoItemService = todoItemService;
             TodoItems = new ObservableCollection<TodoItem>();
             FetchTodoItemsCommand = new Command(async () => await ExecuteFetchTodoItemsCommand());
+            DeleteTodoItemCommand = new Command(async (item) => await ExecuteDeleteTodoItemCommand((TodoItem)item));
 
             MessagingCenter.Subscribe<NewTodoItemPage, TodoItem>(this, "AddTodoItem", async (obj, item) => await AddTodoItem(item));
         }
@@ -48,6 +50,10 @@ namespace ToDoList.ViewModels
                 // TODO: show alert
                 Debug.WriteLine(ex);
             }
+        }
+        async Task ExecuteDeleteTodoItemCommand(TodoItem item)
+        {
+
         }
 
         async Task ExecuteFetchTodoItemsCommand()

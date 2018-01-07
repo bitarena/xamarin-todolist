@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using System;
+using ToDoList.Models;
 using ToDoList.Services;
 using ToDoList.ViewModels;
 using Xamarin.Forms;
@@ -24,6 +25,13 @@ namespace ToDoList.Views
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new NewTodoItemPage()));
+        }
+
+        async void DeleteItem_Clicked(object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+
+            viewModel.DeleteTodoItemCommand.Execute((TodoItem)menuItem.CommandParameter);
         }
 
         protected override void OnAppearing()

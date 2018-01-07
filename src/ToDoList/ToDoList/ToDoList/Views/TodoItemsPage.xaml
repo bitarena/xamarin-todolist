@@ -23,9 +23,21 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="{Binding IsComplete, Converter={StaticResource StatusToCharConverter}}" />
-                                <Label FontSize="16" Text="{Binding Name}" />
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Clicked="DeleteItem_Clicked"
+                                    CommandParameter="{Binding .}"
+                                    Text="Delete"
+                                    IsDestructive="True" />
+                            </ViewCell.ContextActions>
+                            <StackLayout 
+                                Orientation="Horizontal" 
+                                Padding="10">
+                                <Label 
+                                    Text="{Binding IsComplete, Converter={StaticResource StatusToCharConverter}}" />
+                                <Label 
+                                    FontSize="16" 
+                                    Text="{Binding Name}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
