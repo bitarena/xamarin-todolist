@@ -48,18 +48,23 @@ namespace ToDoList.UnitTests.Services
         public async Task WillCreateNewItem()
         {
             // Arrange
+            var key = Guid.NewGuid().ToString();
             var item = new TodoItem
             {
-                Name = Guid.NewGuid().ToString(),
+                Name = "test",
                 IsComplete = false,
             };
-            todoItemRepository.Create(item).Returns(true);
+
+            var expected = item;
+            expected.Key = key;
+
+            todoItemRepository.Create(item).Returns(expected);
 
             // Act
             var actual = await sut.Create(item);
 
             // Assert
-            Assert.IsTrue(actual);
+            Assert.AreEqual(actual, expected);
         }
     }
 }

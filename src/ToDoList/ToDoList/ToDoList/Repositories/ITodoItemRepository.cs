@@ -17,7 +17,7 @@ namespace ToDoList.Repositories
         /// Stores a new item in the list
         /// </summary>
         /// <param name="item">The item to add to the list</param>
-        /// <returns></returns>
-        Task<bool> Create(TodoItem item);
+        /// <returns>Returns the item just created in the server</returns>
+        Task<TodoItem> Create(TodoItem item);
     }
 }

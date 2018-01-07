@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Threading.Tasks;
 using ToDoList.Models;
 using ToDoList.Repositories;
-using System.Linq;
 
 namespace ToDoList.IntegrationTests.DataAccess
 {
@@ -39,17 +37,15 @@ namespace ToDoList.IntegrationTests.DataAccess
             // Arrange
             var item = new TodoItem
             {
-                Name = Guid.NewGuid().ToString(),
+                Name = "test",
                 IsComplete = false,
             };
 
             // Act
             var actual = await sut.Create(item);
-            var allItems = await sut.GetAll();
 
             // Assert
-            Assert.IsTrue(actual);
-            Assert.IsTrue(allItems.Where(x => x.Name == item.Name).Count() == 1);
+            Assert.IsNotNull(actual.Key);
         }
     }
 }

@@ -40,8 +40,8 @@ namespace ToDoList.ViewModels
         {
             try
             {
-                await todoItemService.Create(item);
-                TodoItems.Add(item);
+                var addedItem = await todoItemService.Create(item);
+                TodoItems.Add(addedItem);
             }
             catch (Exception ex)
             {
