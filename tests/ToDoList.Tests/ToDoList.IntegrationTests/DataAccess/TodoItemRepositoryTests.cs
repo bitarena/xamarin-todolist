@@ -51,5 +51,23 @@ namespace ToDoList.IntegrationTests.DataAccess
             Assert.IsTrue(actual);
             Assert.IsTrue(allItems.Where(x => x.Name == item.Name).Count() == 1);
         }
+
+        [TestMethod]
+        [Ignore]
+        public async Task WillDeleteExistingItem()
+        {
+            // Arrange
+            var item = new TodoItem
+            {
+                Name = "test delete",
+                IsComplete = false
+            };
+
+            await sut.Create(item);
+
+            // Act
+
+            // Assert
+        }
     }
 }

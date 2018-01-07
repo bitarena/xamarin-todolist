@@ -28,6 +28,23 @@ namespace ToDoList.Services
             }
         }
 
+        public async Task Delete(TodoItem item)
+        {
+            if (string.IsNullOrEmpty(item.Key))
+            {
+                throw new ArgumentNullException("key cannot be null");
+            }
+
+            try
+            {
+                await todoItemRepository.Delete(item.Key);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public async Task<IEnumerable<TodoItem>> GetAll()
         {
             try

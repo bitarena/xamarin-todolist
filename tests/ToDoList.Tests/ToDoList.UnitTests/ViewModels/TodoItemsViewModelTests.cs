@@ -26,5 +26,15 @@ namespace ToDoList.UnitTests.ViewModels
             Assert.IsNotNull(sut.FetchTodoItemsCommand);
         }
 
+        [TestMethod]
+        public void DeleteTodoItemCommandIsNotNull()
+        {
+            // Arrange
+            var sut = new TodoItemsViewModel(todoItemService);
+
+            // Assert
+            Assert.IsNotNull(sut.DeleteTodoItemCommand);
+        }
+
     }
 }

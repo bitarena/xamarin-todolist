@@ -61,5 +61,31 @@ namespace ToDoList.UnitTests.Services
             // Assert
             Assert.IsTrue(actual);
         }
+
+        [TestMethod]
+        [Ignore]
+        public async Task WillDeleteOneItem()
+        {
+            // Arrange
+            var item = new TodoItem
+            {
+                Key = Guid.NewGuid().ToString(),
+                Name = "test",
+                IsComplete = true,
+            };
+
+            await sut.Create(item);
+            sut.GetAll().Returns(new List<TodoItem>
+            {
+                item,
+            });
+
+            // Act
+            await sut.Delete(item);
+            var items = await sut.GetAll();
+
+            // Assert
+            Assert.IsFalse(items.Any(x => x.Key == item.Key));
+        }
     }
 }

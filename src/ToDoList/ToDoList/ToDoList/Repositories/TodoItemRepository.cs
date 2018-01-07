@@ -39,6 +39,11 @@ namespace ToDoList.Repositories
             }
         }
 
+        public Task Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<TodoItem>> GetAll()
         {
             var httpClient = new HttpClient();
