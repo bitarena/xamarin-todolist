@@ -15,7 +15,7 @@ namespace ToDoList.Services
             this.todoItemRepository = todoItemRepository ?? throw new ArgumentNullException("todoItemRepository");
         }
 
-        public async Task<bool> Create(TodoItem item)
+        public async Task<TodoItem> Create(TodoItem item)
         {
             try
             {

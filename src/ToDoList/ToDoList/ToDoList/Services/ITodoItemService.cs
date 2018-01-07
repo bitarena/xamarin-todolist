@@ -8,6 +8,6 @@ namespace ToDoList.Services
     {
         Task<IEnumerable<TodoItem>> GetAll();
 
-        Task<bool> Create(TodoItem item);
+        Task<TodoItem> Create(TodoItem item);
     }
 }

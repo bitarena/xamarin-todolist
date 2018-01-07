@@ -18,7 +18,7 @@ namespace ToDoList.Repositories
             this.options = options ?? throw new ArgumentNullException("options");
         }
 
-        public async Task<bool> Create(TodoItem item)
+        public async Task<TodoItem> Create(TodoItem item)
         {
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(item);
@@ -27,7 +27,14 @@ namespace ToDoList.Repositories
             try
             {
                 var response = await httpClient.PostAsync(options.CreateUrl, content);
-                return response.IsSuccessStatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<TodoItem>(data);
+                    return result;
+                }
+                return null;
             }
             catch (HttpRequestException e)
             {
