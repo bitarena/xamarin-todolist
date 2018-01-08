@@ -92,5 +92,24 @@ namespace ToDoList.UnitTests.Services
             // Assert
             Assert.IsFalse(items.Any(x => x.Key == item.Key));
         }
+
+        [TestMethod]
+        public async Task WillPassCorrectParamsToUpdate()
+        {
+            // Arrange
+            var key = Guid.NewGuid().ToString();
+            var item = new TodoItem
+            {
+                Key = key,
+                Name = "service update test",
+                IsComplete = false,
+            };
+
+            // Act
+            await sut.Update(item);
+
+            // Assert
+            await todoItemRepository.Received().Update(item.Key, item);
+        }
     }
 }

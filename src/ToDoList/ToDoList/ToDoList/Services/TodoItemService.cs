@@ -57,5 +57,17 @@ namespace ToDoList.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public async Task Update(TodoItem item)
+        {
+            try
+            {
+                await todoItemRepository.Update(item.Key, item);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

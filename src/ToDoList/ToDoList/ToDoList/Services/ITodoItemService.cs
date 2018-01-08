@@ -4,6 +4,7 @@ using ToDoList.Models;
 
 namespace ToDoList.Services
 {
+    // TODO: Improve doc
     public interface ITodoItemService
     {
         // TODO: add documentation
@@ -18,5 +19,12 @@ namespace ToDoList.Services
         /// <param name="item">The item to be removed</param>
         /// exception cref="Exception">Exception</exception>
         Task Delete(TodoItem item);
+
+        /// <summary>
+        /// Updates an item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        Task Update(TodoItem item);
     }
 }
