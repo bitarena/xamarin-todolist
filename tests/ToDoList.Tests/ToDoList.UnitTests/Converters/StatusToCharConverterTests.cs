@@ -35,7 +35,7 @@ namespace ToDoList.UnitTests.Converters
         {
             // Arrange
             var isComplete = false;
-            var expected = "x";
+            var expected = string.Empty;
 
             // Act
             var actual = sut.Convert(isComplete, null, null, null);
