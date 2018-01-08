@@ -107,7 +107,7 @@ namespace ToDoList.IntegrationTests.DataAccess
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public async Task WillErrorWhenUpdateItemNotFound()
         {
             // Arrange

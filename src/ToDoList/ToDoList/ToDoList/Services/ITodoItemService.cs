@@ -21,10 +21,10 @@ namespace ToDoList.Services
         Task Delete(TodoItem item);
 
         /// <summary>
-        /// Updates an item
+        /// Toggles the state of a Todo item
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
-        Task Update(TodoItem item);
+        /// <returns>The updated Todo Item</returns>
+        Task<TodoItem> ToggleIsComplete(TodoItem item);
     }
 }

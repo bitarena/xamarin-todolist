@@ -28,6 +28,15 @@ namespace ToDoList.Views
             BindingContext = viewModel = new TodoItemsViewModel(todoItemService);
         }
 
+        async void Item_Tapped(object sender, ItemTappedEventArgs e)
+        {
+            var todoItem = e.Item as TodoItem;
+
+            viewModel.ToggleIsCompleteCommand.Execute(todoItem);
+
+            
+        }
+
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new NewTodoItemPage()));

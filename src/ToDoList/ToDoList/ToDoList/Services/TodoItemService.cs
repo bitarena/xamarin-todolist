@@ -58,11 +58,14 @@ namespace ToDoList.Services
             }
         }
 
-        public async Task Update(TodoItem item)
+        public async Task<TodoItem> ToggleIsComplete(TodoItem item)
         {
+            item.IsComplete = !item.IsComplete;
+
             try
             {
                 await todoItemRepository.Update(item.Key, item);
+                return item;
             }
             catch (Exception e)
             {

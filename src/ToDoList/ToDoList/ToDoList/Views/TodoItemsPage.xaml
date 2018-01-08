@@ -19,7 +19,8 @@
                 RefreshCommand="{Binding FetchTodoItemsCommand}"
                 VerticalOptions="FillAndExpand"
                 IsPullToRefreshEnabled="True"
-                IsRefreshing="{Binding IsRefreshing}">
+                IsRefreshing="{Binding IsRefreshing}"
+                ItemTapped="Item_Tapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

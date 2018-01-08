@@ -94,7 +94,7 @@ namespace ToDoList.UnitTests.Services
         }
 
         [TestMethod]
-        public async Task WillPassCorrectParamsToUpdate()
+        public async Task WillPassCorrectParamsToUpdateWhenToggling()
         {
             // Arrange
             var key = Guid.NewGuid().ToString();
@@ -106,7 +106,7 @@ namespace ToDoList.UnitTests.Services
             };
 
             // Act
-            await sut.Update(item);
+            await sut.ToggleIsComplete(item);
 
             // Assert
             await todoItemRepository.Received().Update(item.Key, item);
